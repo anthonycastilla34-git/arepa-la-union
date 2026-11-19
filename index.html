@@ -1,0 +1,2848 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fábricas de Arepas La Unión | Tradición, Calidad y Distribución</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-cream: #FAF6F0;
+      --bg-surface: #FFFFFF;
+      --bg-warm: #F2E9DC;
+      --ink-primary: #2C1810;
+      --ink-secondary: #5E4335;
+      --ink-muted: #8A6E5E;
+      --accent-corn: #B85D19;
+      --accent-corn-hover: #96480E;
+      --accent-leaf: #2D6A4F;
+      --accent-leaf-soft: #E8F3EE;
+      --accent-gold: #D99B26;
+      --border-soft: #E5D9C7;
+      --shadow-sm: 0 4px 14px rgba(44, 24, 16, 0.06);
+      --shadow-md: 0 12px 30px rgba(44, 24, 16, 0.10);
+      --shadow-lg: 0 20px 44px rgba(44, 24, 16, 0.16);
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --transition: all 0.25s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-cream);
+      color: var(--ink-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body.gate-locked {
+      overflow: hidden;
+    }
+
+    body.gate-locked #appShell {
+      filter: blur(6px);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .entry-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background:
+        radial-gradient(circle at 85% 18%, rgba(217, 155, 38, 0.22), transparent 42%),
+        radial-gradient(circle at 15% 85%, rgba(45, 106, 79, 0.16), transparent 45%),
+        rgba(28, 15, 10, 0.72);
+      backdrop-filter: blur(8px);
+    }
+
+    .entry-gate.open {
+      display: flex;
+    }
+
+    .entry-card {
+      width: min(510px, 100%);
+      max-height: 92vh;
+      overflow-y: auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    h1, h2, h3, h4, .brand-font {
+      font-family: 'Playfair Display', Georgia, serif;
+      color: var(--ink-primary);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, select, textarea {
+      font-family: inherit;
+    }
+
+    .container {
+      width: min(1180px, 92%);
+      margin: 0 auto;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background-color: var(--accent-corn);
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(184, 93, 25, 0.25);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--accent-corn-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background-color: var(--accent-leaf);
+      color: #fff;
+    }
+
+    .btn-secondary:hover {
+      background-color: #22543E;
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--ink-primary);
+      border: 1.5px solid var(--border-soft);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent-corn);
+      color: var(--accent-corn);
+      background-color: rgba(184, 93, 25, 0.05);
+    }
+
+    .btn-sm {
+      padding: 8px 14px;
+      font-size: 0.85rem;
+    }
+
+    .section {
+      padding: 76px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 46px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-corn);
+      background: rgba(184, 93, 25, 0.12);
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 3.5vw, 2.65rem);
+      line-height: 1.18;
+      margin-bottom: 14px;
+    }
+
+    .section-subtitle {
+      color: var(--ink-secondary);
+      font-size: 1.02rem;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      background: rgba(250, 246, 240, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 74px;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent-corn), var(--accent-gold));
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.15rem;
+      box-shadow: var(--shadow-sm);
+      flex-shrink: 0;
+    }
+
+    .brand-text strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.12rem;
+      line-height: 1.1;
+    }
+
+    .brand-text span {
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--ink-secondary);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-corn);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cart-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: var(--ink-primary);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .cart-btn:hover {
+      background: var(--accent-corn);
+    }
+
+    .cart-badge {
+      background: var(--accent-gold);
+      color: var(--ink-primary);
+      font-size: 0.76rem;
+      font-weight: 800;
+      min-width: 20px;
+      height: 20px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      padding: 0 5px;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 1.5px solid var(--border-soft);
+      border-radius: 10px;
+      padding: 8px 10px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--ink-primary);
+    }
+
+    .hero {
+      padding: 64px 0 72px;
+      background:
+        radial-gradient(circle at 88% 18%, rgba(217, 155, 38, 0.16), transparent 42%),
+        radial-gradient(circle at 12% 85%, rgba(45, 106, 79, 0.11), transparent 45%),
+        var(--bg-cream);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.3rem, 4.6vw, 3.45rem);
+      line-height: 1.12;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent-corn);
+    }
+
+    .hero p {
+      font-size: 1.06rem;
+      color: var(--ink-secondary);
+      margin-bottom: 26px;
+      max-width: 560px;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding-top: 22px;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .stat-item strong {
+      display: block;
+      font-size: 1.45rem;
+      font-family: 'Playfair Display', serif;
+      color: var(--ink-primary);
+    }
+
+    .stat-item span {
+      font-size: 0.84rem;
+      color: var(--ink-muted);
+    }
+
+    .hero-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero-visual {
+      border-radius: var(--radius-md);
+      background: linear-gradient(145deg, #3B1E12, #7A3810 55%, #C87D28);
+      color: #fff;
+      padding: 28px;
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-visual::after {
+      content: "LA UNIÓN";
+      position: absolute;
+      right: -14px;
+      bottom: -18px;
+      font-family: 'Playfair Display', serif;
+      font-size: 3.4rem;
+      font-weight: 800;
+      opacity: 0.10;
+      pointer-events: none;
+    }
+
+    .tag-pill {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(4px);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .hero-visual h2 {
+      color: #fff;
+      font-size: 1.55rem;
+      margin-bottom: 8px;
+    }
+
+    .hero-visual p {
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 0.92rem;
+      margin-bottom: 0;
+    }
+
+    .highlight-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      font-size: 0.92rem;
+      color: var(--ink-secondary);
+    }
+
+    .highlight-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .dot-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent-leaf-soft);
+      color: var(--accent-leaf);
+      display: grid;
+      place-items: center;
+      font-weight: 700;
+      font-size: 0.78rem;
+      flex-shrink: 0;
+    }
+
+    .account-band {
+      background: var(--bg-warm);
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+      padding: 28px 0;
+    }
+
+    .account-panel {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 24px 28px;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .account-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .status-logged-out {
+      background: #FEF3C7;
+      color: #92400E;
+    }
+
+    .status-logged-in {
+      background: var(--accent-leaf-soft);
+      color: var(--accent-leaf);
+    }
+
+    .status-admin {
+      background: #2C1810;
+      color: #FDE68A;
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 32px;
+      background: var(--bg-surface);
+      padding: 14px 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .category-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tab-btn {
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--ink-secondary);
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .tab-btn:hover {
+      color: var(--accent-corn);
+      background: rgba(184, 93, 25, 0.08);
+    }
+
+    .tab-btn.active {
+      background: var(--accent-corn);
+      color: #fff;
+    }
+
+    .search-box {
+      position: relative;
+      min-width: 240px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 9px 14px 9px 36px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border-soft);
+      background: var(--bg-cream);
+      font-size: 0.9rem;
+      color: var(--ink-primary);
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--accent-corn);
+      background: #fff;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--ink-muted);
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+      gap: 24px;
+    }
+
+    .product-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .product-top {
+      padding: 20px 20px 14px;
+    }
+
+    .product-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .badge-cat {
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent-leaf);
+      background: var(--accent-leaf-soft);
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+
+    .badge-tag {
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: var(--accent-corn);
+    }
+
+    .product-title {
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+    }
+
+    .product-desc {
+      font-size: 0.9rem;
+      color: var(--ink-secondary);
+      margin-bottom: 14px;
+    }
+
+    .product-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      background: var(--bg-cream);
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    .product-bottom {
+      padding: 14px 20px 20px;
+      border-top: 1px dashed var(--border-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pack-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .pack-select {
+      padding: 7px 10px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border-soft);
+      background: var(--bg-cream);
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--ink-primary);
+      cursor: pointer;
+    }
+
+    .price-box strong {
+      font-size: 1.18rem;
+      color: var(--ink-primary);
+    }
+
+    .price-box span {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+    }
+
+    .product-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .quote-section {
+      background: var(--bg-warm);
+      border-top: 1px solid var(--border-soft);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .quote-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .panel-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--ink-primary);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid var(--border-soft);
+      background: var(--bg-cream);
+      font-size: 0.94rem;
+      color: var(--ink-primary);
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent-corn);
+      background: #fff;
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .summary-box {
+      background: var(--bg-cream);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-top: 16px;
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 0.94rem;
+      color: var(--ink-secondary);
+    }
+
+    .summary-total {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 12px;
+      border-top: 1.5px solid var(--border-soft);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--ink-primary);
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 20px;
+    }
+
+    .step-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--accent-corn);
+      color: #fff;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+    }
+
+    .step-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .step-card p {
+      font-size: 0.9rem;
+      color: var(--ink-secondary);
+    }
+
+    .requests-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .folder-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg-warm);
+      border: 1px solid var(--border-soft);
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--ink-primary);
+    }
+
+    .requests-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .request-item {
+      background: var(--bg-cream);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .request-meta {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      margin-top: 4px;
+    }
+
+    .admin-vault {
+      margin-top: 24px;
+      padding: 20px;
+      border-radius: var(--radius-md);
+      background: #2C1810;
+      color: #FAF6F0;
+      border: 1px solid #5E4335;
+    }
+
+    .admin-vault h4 {
+      color: #FDE68A;
+      margin-bottom: 6px;
+      font-size: 1.15rem;
+    }
+
+    .admin-folder-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(255, 255, 255, 0.07);
+      margin-top: 10px;
+      font-size: 0.85rem;
+    }
+
+    .secret-pill {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 3px 9px;
+      border-radius: 6px;
+      background: rgba(253, 230, 138, 0.14);
+      color: #FDE68A;
+      font-family: monospace;
+      font-size: 0.82rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 32px;
+    }
+
+    .info-card {
+      background: var(--ink-primary);
+      color: #fff;
+      border-radius: var(--radius-lg);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .info-card h3 {
+      color: #fff;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .info-card p {
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 0.94rem;
+    }
+
+    .info-detail {
+      display: grid;
+      gap: 14px;
+      font-size: 0.92rem;
+    }
+
+    .info-detail div strong {
+      display: block;
+      color: var(--accent-gold);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 2px;
+    }
+
+    footer {
+      background: #1C0F0A;
+      color: rgba(255, 255, 255, 0.78);
+      padding: 36px 0;
+      font-size: 0.88rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(28, 15, 10, 0.48);
+      z-index: 120;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .drawer-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: min(430px, 100vw);
+      height: 100vh;
+      background: var(--bg-surface);
+      z-index: 130;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .cart-drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .close-btn {
+      background: var(--bg-cream);
+      border: 1px solid var(--border-soft);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      color: var(--ink-primary);
+    }
+
+    .drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 18px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .cart-item {
+      border: 1px solid var(--border-soft);
+      background: var(--bg-cream);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .cart-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .cart-item-title {
+      font-weight: 700;
+      font-size: 0.96rem;
+    }
+
+    .cart-item-sub {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+    }
+
+    .qty-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .qty-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      border: 1px solid var(--border-soft);
+      background: #fff;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .drawer-footer {
+      padding: 18px 22px 22px;
+      border-top: 1px solid var(--border-soft);
+      background: var(--bg-cream);
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(28, 15, 10, 0.56);
+      z-index: 140;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      width: min(540px, 100%);
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 26px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .auth-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      background: var(--bg-cream);
+      padding: 6px;
+      border-radius: 999px;
+      border: 1px solid var(--border-soft);
+      margin-bottom: 18px;
+    }
+
+    .auth-tab {
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--ink-secondary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .auth-tab.active {
+      background: var(--accent-corn);
+      color: #fff;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(90px);
+      background: var(--ink-primary);
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      z-index: 250;
+      opacity: 0;
+      transition: all 0.3s ease;
+      max-width: 92vw;
+      text-align: center;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 36px 18px;
+      color: var(--ink-muted);
+      border: 1.5px dashed var(--border-soft);
+      border-radius: var(--radius-md);
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .account-panel,
+      .quote-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 74px;
+        left: 0;
+        right: 0;
+        background: var(--bg-surface);
+        flex-direction: column;
+        padding: 20px;
+        border-bottom: 1px solid var(--border-soft);
+        box-shadow: var(--shadow-md);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .form-row-2,
+      .hero-stats,
+      .product-actions,
+      .auth-tabs {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="gate-locked">
+  <div class="entry-gate open" id="entryGate" role="dialog" aria-modal="true" aria-labelledby="gateTitle">
+    <div class="entry-card">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+        <div class="brand-mark">LU</div>
+        <div class="brand-text">
+          <strong id="gateTitle">Fábricas de Arepas La Unión</strong>
+          <span>Ingresa tus credenciales para entrar al inicio</span>
+        </div>
+      </div>
+
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab active" id="gateTabLogin" onclick="switchGateTab('login')">Iniciar sesión</button>
+        <button type="button" class="auth-tab" id="gateTabRegister" onclick="switchGateTab('register')">Crear cuenta</button>
+      </div>
+
+      <form id="gateLoginForm" onsubmit="handleGateLogin(event)">
+        <div class="form-group">
+          <label for="gateLoginUser">Usuario o correo</label>
+          <input type="text" id="gateLoginUser" class="form-control" placeholder="ej. cliente@correo.com" oninput="updateGateFolderPreview()" required />
+        </div>
+        <div class="form-group">
+          <label for="gateLoginPass">Contraseña</label>
+          <input type="password" id="gateLoginPass" class="form-control" placeholder="••••••••" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Entrar al inicio</button>
+      </form>
+
+      <form id="gateRegisterForm" style="display:none;" onsubmit="handleGateRegister(event)">
+        <div class="form-group">
+          <label for="gateRegName">Nombre o razón social</label>
+          <input type="text" id="gateRegName" class="form-control" placeholder="Ej. Distribuidora Central" required />
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="gateRegEmail">Correo electrónico</label>
+            <input type="email" id="gateRegEmail" class="form-control" placeholder="cliente@correo.com" oninput="updateGateFolderPreview()" required />
+          </div>
+          <div class="form-group">
+            <label for="gateRegPhone">Teléfono / WhatsApp</label>
+            <input type="tel" id="gateRegPhone" class="form-control" placeholder="300 000 0000" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="gateRegRole">Tipo de cuenta</label>
+          <select id="gateRegRole" class="form-control">
+            <option value="Cliente">Cliente</option>
+            <option value="Aliado Comercial">Aliado Comercial</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="gateRegPass">Contraseña</label>
+          <input type="password" id="gateRegPass" class="form-control" placeholder="Mínimo 4 caracteres" minlength="4" required />
+        </div>
+        <button type="submit" class="btn btn-secondary" style="width:100%;">Crear carpeta y entrar</button>
+      </form>
+
+    </div>
+  </div>
+
+  <div id="appShell">
+    <header>
+      <div class="container nav-inner">
+        <a href="#" class="brand">
+          <div class="brand-mark">LU</div>
+          <div class="brand-text">
+            <strong>Arepas La Unión</strong>
+            <span>Fábrica y Distribución</span>
+          </div>
+        </a>
+
+        <nav class="nav-links" id="navLinks">
+          <a href="#cuenta">Cuenta</a>
+          <a href="#catalogo">Catálogo</a>
+          <a href="#cotizador">Cotizador</a>
+          <a href="#proceso">Producción</a>
+          <a href="#solicitudes">Solicitudes</a>
+          <a href="#contacto">Contacto</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button class="btn btn-outline btn-sm" type="button" id="headerAccountBtn" onclick="openAccountModal()">
+            Cuenta
+          </button>
+          <button class="cart-btn" type="button" onclick="toggleCart(true)" aria-label="Abrir carrito de pedidos">
+            <span>Pedido</span>
+            <span class="cart-badge" id="cartCount">0</span>
+          </button>
+          <button class="menu-toggle" type="button" onclick="toggleMenu()" aria-label="Menú principal">☰</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow">Maíz Seleccionado · Elaboración Diaria</span>
+          <h1>El sabor auténtico de la arepa en <em>cada mesa</em></h1>
+          <p>
+            En <strong>Fábricas de Arepas La Unión</strong> producimos arepas frescas, congeladas y listas para asar con maíz seleccionado, estándares estrictos de inocuidad y entregas programadas para hogares, tiendas, restaurantes y eventos.
+          </p>
+          <div class="hero-cta">
+            <a href="#catalogo" class="btn btn-primary">Explorar catálogo</a>
+            <a href="#cotizador" class="btn btn-outline">Cotizar mayorista o evento</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <strong>100%</strong>
+              <span>Maíz seleccionado</span>
+            </div>
+            <div class="stat-item">
+              <strong>24/48h</strong>
+              <span>Despacho programado</span>
+            </div>
+            <div class="stat-item">
+              <strong>+180</strong>
+              <span>Puntos y aliados</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-visual">
+            <span class="tag-pill">Línea Planta La Unión</span>
+            <h2>Calidad constante de principio a fin</h2>
+            <p>
+              Recetas estandarizadas, empaque protector al vacío o termosellado y trazabilidad por lote en cada despacho.
+            </p>
+          </div>
+          <ul class="highlight-list">
+            <li><span class="dot-check">✓</span> Presentaciones por paquete, bolsa familiar y caja mayorista</li>
+            <li><span class="dot-check">✓</span> Descuentos automáticos por volumen en tu pedido</li>
+            <li><span class="dot-check">✓</span> Envío directo de solicitudes a WhatsApp 311 499 6926</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="account-band" id="cuenta">
+      <div class="container account-panel">
+        <div>
+          <div id="accountStatusBadge" class="account-status-badge status-logged-out">
+            Sesión bloqueada · Ingresa credenciales
+          </div>
+          <h2 style="font-size: 1.45rem; margin-bottom: 6px;" id="accountHeadline">
+            Carpeta y sesión de cuenta
+          </h2>
+        </div>
+
+        <div id="accountActionArea"></div>
+      </div>
+    </section>
+
+    <section class="section" id="catalogo">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Nuestro Catálogo</span>
+          <h2 class="section-title">Variedades elaboradas en La Unión</h2>
+          <p class="section-subtitle">
+            Selecciona el tipo de empaque en cada referencia, solicita un producto directamente o agrégalo al carrito.
+          </p>
+        </div>
+
+        <div class="filter-bar">
+          <div class="category-tabs" id="categoryTabs">
+            <button class="tab-btn active" data-category="Todas" onclick="selectCategory('Todas')">Todas</button>
+            <button class="tab-btn" data-category="Arepas Para Rellenar" onclick="selectCategory('Arepas Para Rellenar')">Arepas Para Rellenar</button>
+            <button class="tab-btn" data-category="Arepa Dulce De Queso" onclick="selectCategory('Arepa Dulce De Queso')">Arepa Dulce De Queso</button>
+            <button class="tab-btn" data-category="Arepa Almojabanada" onclick="selectCategory('Arepa Almojabanada')">Arepa Almojabanada</button>
+            <button class="tab-btn" data-category="Integral y Fit" onclick="selectCategory('Integral y Fit')">Integral y Fit</button>
+          </div>
+
+          <div class="search-box">
+            <span class="search-icon">⌕</span>
+            <input type="text" id="searchInput" placeholder="Buscar variedad..." oninput="renderCatalog()" />
+          </div>
+        </div>
+
+        <div class="catalog-grid" id="catalogGrid"></div>
+      </div>
+    </section>
+
+    <section class="section quote-section" id="cotizador">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Cotizador Inteligente</span>
+          <h2 class="section-title">Pedidos mayoristas y eventos</h2>
+          <p class="section-subtitle">
+            Calcula unidades estimadas, aplica descuentos por volumen y guarda o envía tu cotización.
+          </p>
+        </div>
+
+        <div class="quote-grid">
+          <form class="panel-card" id="quoteForm" onsubmit="submitQuote(event)">
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="quoteVariety">Variedad principal</label>
+                <select id="quoteVariety" class="form-control" onchange="calculateQuote()"></select>
+              </div>
+              <div class="form-group">
+                <label for="quoteChannel">Tipo de cliente</label>
+                <select id="quoteChannel" class="form-control" onchange="calculateQuote()">
+                  <option value="Restaurante / Cafetería">Restaurante / Cafetería</option>
+                  <option value="Tienda / Minimercado">Tienda / Minimercado</option>
+                  <option value="Evento / Catering">Evento / Catering</option>
+                  <option value="Hogar / Reunión">Hogar / Reunión</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="quotePacks">Cantidad de paquetes base</label>
+                <input type="number" id="quotePacks" class="form-control" min="1" max="500" value="25" oninput="calculateQuote()" />
+              </div>
+              <div class="form-group">
+                <label for="quoteFrequency">Frecuencia de entrega</label>
+                <select id="quoteFrequency" class="form-control" onchange="calculateQuote()">
+                  <option value="Única">Entrega única</option>
+                  <option value="Semanal">Semanal</option>
+                  <option value="Quincenal">Quincenal</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="quoteName">Nombre o negocio</label>
+                <input type="text" id="quoteName" class="form-control" placeholder="Ej. Cafetería El Mirador" required />
+              </div>
+              <div class="form-group">
+                <label for="quotePhone">Teléfono de contacto</label>
+                <input type="tel" id="quotePhone" class="form-control" placeholder="Ej. 300 000 0000" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="quoteNotes">Observaciones de entrega o empaque</label>
+              <textarea id="quoteNotes" class="form-control" rows="2" placeholder="Horario preferido, dirección o detalles del evento..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-secondary" style="width: 100%;">
+              Guardar cotización y enviar a WhatsApp
+            </button>
+          </form>
+
+          <div class="panel-card">
+            <span class="eyebrow">Resumen Estimado</span>
+            <h3 style="font-size: 1.4rem; margin-bottom: 6px;">Proyección de Pedido</h3>
+            <p style="font-size: 0.9rem; color: var(--ink-secondary);">
+              Escala automática: <strong>5%</strong> desde $120.000 COP y <strong>10%</strong> desde $300.000 COP.
+            </p>
+
+            <div class="summary-box">
+              <div class="summary-line">
+                <span>Total de unidades estimadas</span>
+                <strong id="qTotalUnits">0 und.</strong>
+              </div>
+              <div class="summary-line">
+                <span>Subtotal bruto</span>
+                <span id="qSubtotal">$0</span>
+              </div>
+              <div class="summary-line">
+                <span>Descuento aplicado (<span id="qDiscountPct">0%</span>)</span>
+                <span id="qDiscountAmt" style="color: var(--accent-leaf); font-weight: 700;">-$0</span>
+              </div>
+              <div class="summary-total">
+                <span>Total estimado</span>
+                <span id="qTotal">$0</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 18px; font-size: 0.86rem; color: var(--ink-secondary);">
+              <strong>Frecuencia seleccionada:</strong> <span id="qFreqLabel">Entrega única</span><br />
+              <strong>Destino directo:</strong> WhatsApp 311 499 6926 (guardado en la carpeta de la cuenta activa).
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="proceso">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Planta y Calidad</span>
+          <h2 class="section-title">Cómo elaboramos cada arepa</h2>
+          <p class="section-subtitle">
+            Procesos controlados en cada etapa para conservar textura, aroma y frescura en cada entrega.
+          </p>
+        </div>
+
+        <div class="process-grid">
+          <div class="step-card">
+            <div class="step-num">01</div>
+            <h3>Selección del Maíz</h3>
+            <p>Elegimos materias primas de calidad constante y verificamos humedad y limpieza antes de iniciar cada lote.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">02</div>
+            <h3>Cocción y Molido</h3>
+            <p>Preparamos la masa con tiempos y temperaturas controlados para lograr suavidad interior y firmeza al asar.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">03</div>
+            <h3>Formado e Inocuidad</h3>
+            <p>Moldeamos con espesor uniforme bajo protocolos de higiene, manipulación segura y control de cadena de frío.</p>
+          </div>
+          <div class="step-card">
+            <div class="step-num">04</div>
+            <h3>Empaque y Despacho</h3>
+            <p>Sellamos cada presentación con etiqueta de lote y despachamos según la programación de cada cliente o aliado.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+          </p>
+        </div>
+
+        <div class="panel-card">
+          <div class="requests-toolbar">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px;">
+              <span class="folder-chip" id="folderChipText">Carpeta activa: sin sesión</span>
+              <span style="font-size: 0.88rem; color: var(--ink-secondary);" id="requestsCountText">0 registros</span>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;" id="requestsToolbarButtons"></div>
+          </div>
+
+          <div class="requests-list" id="requestsList"></div>
+          <div id="adminVaultContainer"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contacto">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Atención Directa</span>
+          <h2 class="section-title">Habla con Fábricas de Arepas La Unión</h2>
+          <p class="section-subtitle">
+            ¿Buscas distribución continua, marca blanca o atención para tu negocio? Escríbenos y envíalo directo a WhatsApp.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="info-card">
+            <div>
+              <h3>Fábricas de Arepas La Unión</h3>
+              <p>
+                Producción artesanal a escala con acompañamiento comercial para tiendas, supermercados, restaurantes y eventos.
+              </p>
+            </div>
+
+            <div class="info-detail">
+              <div>
+                <strong>WhatsApp de Pedidos y Solicitudes</strong>
+                <span>311 499 6926 (+57 311 499 6926)</span>
+              </div>
+              <div>
+                <strong>Horario de Atención</strong>
+                <span>Lunes a Sábado · 6:00 a. m. – 9:00 p. m.</span>
+              </div>
+              <div>
+                <strong>Cobertura</strong>
+                <span>Despachos locales, regionales y rutas programadas</span>
+              </div>
+            </div>
+          </div>
+
+          <form class="panel-card" id="contactForm" onsubmit="submitContact(event)">
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="contactName">Nombre completo</label>
+                <input type="text" id="contactName" class="form-control" placeholder="Tu nombre" required />
+              </div>
+              <div class="form-group">
+                <label for="contactPhone">Teléfono / WhatsApp</label>
+                <input type="tel" id="contactPhone" class="form-control" placeholder="Ej. 310 000 0000" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contactTopic">Asunto</label>
+              <select id="contactTopic" class="form-control">
+                <option value="Solicitud de producto">Solicitud de producto</option>
+                <option value="Distribución mayorista">Distribución mayorista</option>
+                <option value="Pedido para evento">Pedido para evento</option>
+                <option value="Información general">Información general</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="contactMessage">Mensaje o detalle de tu solicitud</label>
+              <textarea id="contactMessage" class="form-control" rows="4" placeholder="Cuéntanos qué arepas necesitas, cantidades o fecha de entrega..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              Guardar solicitud y enviar a WhatsApp (311 499 6926)
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container footer-inner">
+        <div>
+          <strong style="color: #fff; font-family: 'Playfair Display', serif; font-size: 1.05rem;">
+            Fábricas de Arepas La Unión
+          </strong>
+          <div>Calidad, tradición y frescura en cada entrega · WhatsApp 311 499 6926</div>
+        </div>
+        <div>© <span id="yearSpan"></span> Fábricas de Arepas La Unión. Todos los derechos reservados.</div>
+      </div>
+    </footer>
+  </div>
+
+  <div class="drawer-backdrop" id="cartBackdrop" onclick="toggleCart(false)"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de pedidos">
+    <div class="drawer-header">
+      <div>
+        <h3 style="font-size: 1.25rem;">Tu Pedido</h3>
+        <span style="font-size: 0.8rem; color: var(--ink-muted);" id="drawerAccountNote">Inicia sesión para gestionar pedidos</span>
+      </div>
+      <button class="close-btn" type="button" onclick="toggleCart(false)" aria-label="Cerrar carrito">✕</button>
+    </div>
+
+    <div class="drawer-body" id="cartItemsContainer"></div>
+
+    <div class="drawer-footer">
+      <div class="summary-line">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">$0</span>
+      </div>
+      <div class="summary-line">
+        <span>Descuento (<span id="cartDiscountLabel">0%</span>)</span>
+        <span id="cartDiscountAmount" style="color: var(--accent-leaf); font-weight: 700;">-$0</span>
+      </div>
+      <div class="summary-total" style="margin-bottom: 14px;">
+        <span>Total a pagar</span>
+        <span id="cartTotal">$0</span>
+      </div>
+
+      <button type="button" class="btn btn-primary" style="width: 100%; margin-bottom: 8px;" onclick="checkoutOrder()">
+        Confirmar pedido y enviar a WhatsApp
+      </button>
+      <button type="button" class="btn btn-outline btn-sm" style="width: 100%;" onclick="clearCart()">
+        Vaciar carrito
+      </button>
+    </div>
+  </aside>
+
+  <div class="modal-backdrop" id="accountModal" onclick="handleModalBackdropClick(event)">
+    <div class="modal-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <h3 style="font-size: 1.35rem;" id="modalAccountTitle">Cambiar de Cuenta / Solo Admin</h3>
+        <button class="close-btn" type="button" onclick="closeAccountModal()">✕</button>
+      </div>
+
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab active" id="tabLogin" onclick="switchAuthTab('login')">Iniciar sesión</button>
+        <button type="button" class="auth-tab" id="tabRegister" onclick="switchAuthTab('register')">Crear cuenta</button>
+        <button type="button" class="auth-tab" id="tabAdmin" onclick="switchAuthTab('admin')">Solo Admin</button>
+      </div>
+
+      <form id="loginForm" onsubmit="handleModalLogin(event)">
+        <div class="form-group">
+          <label for="loginIdentifier">Usuario o correo</label>
+          <input type="text" id="loginIdentifier" class="form-control" placeholder="ej. cliente@correo.com" required />
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Contraseña</label>
+          <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Iniciar sesión</button>
+      </form>
+
+      <form id="registerForm" style="display: none;" onsubmit="handleModalRegister(event)">
+        <div class="form-group">
+          <label for="regName">Nombre o razón social</label>
+          <input type="text" id="regName" class="form-control" placeholder="Ej. Distribuidora Central" required />
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="regEmail">Correo electrónico</label>
+            <input type="email" id="regEmail" class="form-control" placeholder="cliente@correo.com" required />
+          </div>
+          <div class="form-group">
+            <label for="regPhone">Teléfono / WhatsApp</label>
+            <input type="tel" id="regPhone" class="form-control" placeholder="300 000 0000" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="regRole">Tipo de cuenta</label>
+          <select id="regRole" class="form-control">
+            <option value="Cliente">Cliente</option>
+            <option value="Aliado Comercial">Aliado Comercial</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="regPassword">Contraseña</label>
+          <input type="password" id="regPassword" class="form-control" placeholder="Mínimo 4 caracteres" minlength="4" required />
+        </div>
+        <button type="submit" class="btn btn-secondary" style="width: 100%;">Crear cuenta y carpeta</button>
+      </form>
+
+      <form id="adminModalForm" style="display: none;" onsubmit="handleModalAdminLogin(event)">
+        <div class="form-group">
+          <label for="modalAdminKey">Clave maestra de administrador</label>
+          <input type="password" id="modalAdminKey" class="form-control" placeholder="Solo tú conoces esta clave" required />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; background:#2C1810;">
+          Entrar a cuenta Admin
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toastBox"></div>
+
+  <script>
+    const WHATSAPP_NUMBER = "573114996926";
+    // Cambia esta clave maestra por la que solo tú conozcas
+    const ADMIN_MASTER_KEY = "adminlaunion2026";
+    const RESERVED_ADMIN_EMAIL = "admin@launion.local";
+
+    const STORAGE_KEYS = {
+      session: "launion_session_v5",
+      folders: "launion_account_folders_v5",
+      cart: "launion_cart_v5"
+    };
+
+    const PRODUCTS = [
+      {
+        id: "arepa-dulce-queso",
+        name: "Arepa Dulce de Queso",
+        category: "Arepa Dulce De Queso",
+        tag: "Más pedida",
+        description: "Suave por dentro y dorada por fuera, ideal para acompañar desayunos, huevos, carnes o quesos.",
+        basePrice: 12000,
+        unitsPerBase: 6,
+        weightLabel: "420 g aprox.",
+        prepLabel: "Lista para asar"
+      },
+      {
+        id: "arepa-rellenar",
+        name: "Arepa Para Rellenar",
+        category: "Arepa Para Rellenar",
+        tag: "Sabor casero",
+        description: "Elaborada con maíz amarillo seleccionado de aroma intenso y textura firme en parrilla o sartén.",
+        basePrice: 13000,
+        unitsPerBase: 6,
+        weightLabel: "450 g aprox.",
+        prepLabel: "Lista para asar"
+      },
+      {
+        id: "arepa-almojabanada",
+        name: "Arepa Almojabanada",
+        category: "Arepa Almojabanada",
+        tag: "Favorita",
+        description: "Generoso relleno de queso fundido en su interior para resolver comidas rápidas con excelente sabor.",
+        basePrice: 16500,
+        unitsPerBase: 5,
+        weightLabel: "500 g aprox.",
+        prepLabel: "Calentar y servir"
+      },
+      {
+        id: "arepa-choclo-dulce",
+        name: "Arepa de Choclo Dulce",
+        category: "Arepa de Choclo Dulce",
+        tag: "Dulce y suave",
+        description: "Toque dulce natural de maíz tierno con textura jugosa, perfecta para media tarde o desayuno.",
+        basePrice: 15500,
+        unitsPerBase: 5,
+        weightLabel: "480 g aprox.",
+        prepLabel: "Lista para calentar"
+      },
+      {
+        id: "arepita-parrilla-mini",
+        name: "Arepita de Parrilla Mini",
+        category: "Arepa de Parrilla Mini",
+        tag: "Eventos y asados",
+        description: "Formato pequeño de rápida cocción ideal para asados, picadas, reuniones y catering.",
+        basePrice: 14000,
+        unitsPerBase: 12,
+        weightLabel: "480 g aprox.",
+        prepLabel: "Cocción rápida"
+      },
+      {
+        id: "arepa-telera-asada",
+        name: "Arepa Telera / Asada",
+        category: "Arepa Telera / Asada",
+        tag: "Tradición",
+        description: "Corte tradicional para acompañar sopas, caldos, carnes asadas y platos típicos.",
+        basePrice: 13500,
+        unitsPerBase: 6,
+        weightLabel: "460 g aprox.",
+        prepLabel: "Asar al gusto"
+      },
+      {
+        id: "arepa-integral-semillas",
+        name: "Arepa Integral con Semillas",
+        category: "Arepa Integral con Semillas",
+        tag: "Fibra y grano",
+        description: "Mezcla de harina integral y semillas seleccionadas para una opción nutritiva en el día a día.",
+        basePrice: 15000,
+        unitsPerBase: 6,
+        weightLabel: "420 g aprox.",
+        prepLabel: "Lista para asar"
+      },
+      {
+        id: "arepa-multicereal-ligera",
+        name: "Arepa Multicereal Ligera",
+        category: "Arepa Multicereal Ligera",
+        tag: "Balanceada",
+        description: "Textura equilibrada con selección de cereales para desayunos ligeros y versátiles.",
+        basePrice: 15500,
+        unitsPerBase: 6,
+        weightLabel: "420 g aprox.",
+        prepLabel: "Lista para asar"
+      }
+    ];
+
+    const PACK_OPTIONS = [
+      { label: "Paquete base (x1)", multiplier: 1 },
+      { label: "Bolsa familiar (x2)", multiplier: 2 },
+      { label: "Caja mayorista (x4)", multiplier: 4 },
+      { label: "Bandeja evento (x8)", multiplier: 8 }
+    ];
+
+    let currentCategory = "Todas";
+    let sessionUser = loadJSON(STORAGE_KEYS.session, null);
+    let accountFolders = loadJSON(STORAGE_KEYS.folders, {});
+    let cart = loadJSON(STORAGE_KEYS.cart, []);
+    let revealedPasswords = {};
+
+    function loadJSON(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function saveJSON(key, value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
+    function formatCOP(amount) {
+      return new Intl.NumberFormat("es-CO", {
+        style: "currency",
+        currency: "COP",
+        maximumFractionDigits: 0
+      }).format(Math.round(amount || 0));
+    }
+
+    function slugifyFolder(value) {
+      return (value || "cuenta")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "") || "cuenta";
+    }
+
+    function isAdminUser() {
+      return Boolean(sessionUser && sessionUser.isAdmin === true && sessionUser.email === RESERVED_ADMIN_EMAIL);
+    }
+
+    function isReservedAdminIdentifier(rawVal) {
+      const clean = (rawVal || "").trim().toLowerCase();
+      return clean === "admin" || clean === RESERVED_ADMIN_EMAIL || clean === "administrador";
+    }
+
+    function updateGateFolderPreview() {
+      const loginVal = document.getElementById("gateLoginUser")?.value.trim();
+      const regVal = document.getElementById("gateRegEmail")?.value.trim();
+      const raw = regVal || loginVal;
+      const slug = raw
+        ? slugifyFolder(raw.includes("@") ? raw.toLowerCase() : `${slugifyFolder(raw)}@launion.local`)
+        : "tu_cuenta";
+      const el = document.getElementById("gateFolderPreview");
+      if (el) el.textContent = `cuentas/${slug}/`;
+    }
+
+    function syncEntryGate() {
+      const gate = document.getElementById("entryGate");
+      if (sessionUser) {
+        gate.classList.remove("open");
+        document.body.classList.remove("gate-locked");
+      } else {
+        gate.classList.add("open");
+        document.body.classList.add("gate-locked");
+        updateGateFolderPreview();
+      }
+    }
+
+    function switchGateTab(tab) {
+      document.getElementById("gateTabLogin").classList.toggle("active", tab === "login");
+      document.getElementById("gateTabRegister").classList.toggle("active", tab === "register");
+      document.getElementById("gateTabAdmin").classList.toggle("active", tab === "admin");
+      document.getElementById("gateLoginForm").style.display = tab === "login" ? "block" : "none";
+      document.getElementById("gateRegisterForm").style.display = tab === "register" ? "block" : "none";
+      document.getElementById("gateAdminForm").style.display = tab === "admin" ? "block" : "none";
+      updateGateFolderPreview();
+    }
+
+    function ensureAccountFolder(profile, passwordPlain = "") {
+      const folderName = slugifyFolder(profile.email || profile.name);
+      if (!accountFolders[folderName]) {
+        accountFolders[folderName] = {
+          folderPath: `cuentas/${folderName}/`,
+          profile: {
+            name: profile.name,
+            email: profile.email,
+            phone: profile.phone || "",
+            role: profile.role || "Cliente",
+            createdAt: new Date().toISOString()
+          },
+          credentials: {
+            usuario: profile.email,
+            password: passwordPlain || "(protegida)",
+            updatedAt: new Date().toISOString()
+          },
+          requests: []
+        };
+      } else {
+        accountFolders[folderName].profile = {
+          ...accountFolders[folderName].profile,
+          name: profile.name || accountFolders[folderName].profile.name,
+          email: profile.email || accountFolders[folderName].profile.email,
+          phone: profile.phone || accountFolders[folderName].profile.phone,
+          role: profile.role || accountFolders[folderName].profile.role
+        };
+        if (passwordPlain) {
+          accountFolders[folderName].credentials = {
+            usuario: profile.email,
+            password: passwordPlain,
+            updatedAt: new Date().toISOString()
+          };
+        }
+      }
+      saveJSON(STORAGE_KEYS.folders, accountFolders);
+      return folderName;
+    }
+
+    function getActiveFolderKey() {
+      if (!sessionUser) return null;
+      return slugifyFolder(sessionUser.email || sessionUser.name);
+    }
+
+    function requireLogin(actionLabel = "realizar esta acción") {
+      if (sessionUser) return true;
+      showToast(`Ingresa tus credenciales para ${actionLabel}.`);
+      syncEntryGate();
+      return false;
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById("toastBox");
+      box.textContent = msg;
+      box.classList.add("show");
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => box.classList.remove("show"), 3200);
+    }
+
+    function toggleMenu() {
+      document.getElementById("navLinks").classList.toggle("open");
+    }
+
+    function openAccountModal(tab = "login") {
+      switchAuthTab(tab);
+      document.getElementById("accountModal").classList.add("open");
+    }
+
+    function closeAccountModal() {
+      document.getElementById("accountModal").classList.remove("open");
+    }
+
+    function handleModalBackdropClick(e) {
+      if (e.target.id === "accountModal") closeAccountModal();
+    }
+
+    function switchAuthTab(tab) {
+      document.getElementById("tabLogin").classList.toggle("active", tab === "login");
+      document.getElementById("tabRegister").classList.toggle("active", tab === "register");
+      document.getElementById("tabAdmin").classList.toggle("active", tab === "admin");
+      document.getElementById("loginForm").style.display = tab === "login" ? "block" : "none";
+      document.getElementById("registerForm").style.display = tab === "register" ? "block" : "none";
+      document.getElementById("adminModalForm").style.display = tab === "admin" ? "block" : "none";
+    }
+
+    function activateSession(profile, passwordPlain = "") {
+      const folderKey = ensureAccountFolder(profile, passwordPlain);
+      sessionUser = {
+        name: profile.name,
+        email: profile.email,
+        phone: profile.phone || "",
+        role: profile.role || "Cliente",
+        isAdmin: Boolean(profile.isAdmin),
+        folderKey,
+        folderPath: `cuentas/${folderKey}/`
+      };
+      revealedPasswords = {};
+      saveJSON(STORAGE_KEYS.session, sessionUser);
+      syncEntryGate();
+      renderAccountUI();
+      renderRequests();
+      autofillFormsFromSession();
+      showToast(
+        isAdminUser()
+          ? "Sesión Admin iniciada · Solo tú puedes ver y descargar credenciales"
+          : `Bienvenido · Carpeta ${sessionUser.folderPath}`
+      );
+    }
+
+    function verifyClientLogin(idVal, passVal) {
+      if (isReservedAdminIdentifier(idVal)) {
+        showToast("La cuenta Admin es exclusiva. Entra desde la pestaña Solo Admin con tu clave maestra.");
+        return false;
+      }
+
+      const email = idVal.includes("@") ? idVal.toLowerCase() : `${slugifyFolder(idVal)}@launion.local`;
+      const existingKey = slugifyFolder(email);
+      const existingFolder = accountFolders[existingKey];
+
+      if (existingFolder && existingFolder.credentials && existingFolder.credentials.password) {
+        if (
+          existingFolder.credentials.password !== "(protegida)" &&
+          existingFolder.credentials.password !== passVal
+        ) {
+          showToast("Contraseña incorrecta para esta cuenta.");
+          return false;
+        }
+      }
+
+      const existing = existingFolder?.profile;
+      activateSession(
+        {
+          name: existing?.name || idVal.split("@")[0],
+          email,
+          phone: existing?.phone || "311 499 6926",
+          role: existing?.role || "Cliente",
+          isAdmin: false
+        },
+        passVal
+      );
+      return true;
+    }
+
+    function handleGateLogin(e) {
+      e.preventDefault();
+      const idVal = document.getElementById("gateLoginUser").value.trim();
+      const passVal = document.getElementById("gateLoginPass").value;
+      if (!idVal) return;
+      verifyClientLogin(idVal, passVal);
+    }
+
+    function handleGateRegister(e) {
+      e.preventDefault();
+      const name = document.getElementById("gateRegName").value.trim();
+      const email = document.getElementById("gateRegEmail").value.trim().toLowerCase();
+      const phone = document.getElementById("gateRegPhone").value.trim();
+      const role = document.getElementById("gateRegRole").value;
+      const passVal = document.getElementById("gateRegPass").value;
+      if (!name || !email) return;
+
+      if (isReservedAdminIdentifier(email) || isReservedAdminIdentifier(name)) {
+        showToast("Ese nombre/correo está reservado para el administrador.");
+        return;
+      }
+
+      activateSession({ name, email, phone, role, isAdmin: false }, passVal);
+      document.getElementById("gateRegisterForm").reset();
+    }
+
+    function handleGateAdminLogin(e) {
+      e.preventDefault();
+      const key = document.getElementById("gateAdminKey").value.trim();
+      if (key !== ADMIN_MASTER_KEY) {
+        showToast("Clave maestra incorrecta. Solo el administrador puede entrar.");
+        return;
+      }
+      activateSession(
+        {
+          name: "Administrador La Unión",
+          email: RESERVED_ADMIN_EMAIL,
+          phone: "311 499 6926",
+          role: "Administrador",
+          isAdmin: true
+        },
+        key
+      );
+      document.getElementById("gateAdminForm").reset();
+    }
+
+    function handleModalLogin(e) {
+      e.preventDefault();
+      const idVal = document.getElementById("loginIdentifier").value.trim();
+      const passVal = document.getElementById("loginPassword").value;
+      if (!idVal) return;
+      if (verifyClientLogin(idVal, passVal)) {
+        closeAccountModal();
+      }
+    }
+
+    function handleModalRegister(e) {
+      e.preventDefault();
+      const name = document.getElementById("regName").value.trim();
+      const email = document.getElementById("regEmail").value.trim().toLowerCase();
+      const phone = document.getElementById("regPhone").value.trim();
+      const role = document.getElementById("regRole").value;
+      const passVal = document.getElementById("regPassword").value;
+      if (!name || !email) return;
+
+      if (isReservedAdminIdentifier(email) || isReservedAdminIdentifier(name)) {
+        showToast("Ese nombre/correo está reservado para el administrador.");
+        return;
+      }
+
+      activateSession({ name, email, phone, role, isAdmin: false }, passVal);
+      document.getElementById("registerForm").reset();
+      closeAccountModal();
+    }
+
+    function handleModalAdminLogin(e) {
+      e.preventDefault();
+      const key = document.getElementById("modalAdminKey").value.trim();
+      if (key !== ADMIN_MASTER_KEY) {
+        showToast("Clave maestra incorrecta. Solo el administrador puede entrar.");
+        return;
+      }
+      activateSession(
+        {
+          name: "Administrador La Unión",
+          email: RESERVED_ADMIN_EMAIL,
+          phone: "311 499 6926",
+          role: "Administrador",
+          isAdmin: true
+        },
+        key
+      );
+      document.getElementById("adminModalForm").reset();
+      closeAccountModal();
+    }
+
+    function logoutSession() {
+      sessionUser = null;
+      revealedPasswords = {};
+      localStorage.removeItem(STORAGE_KEYS.session);
+      renderAccountUI();
+      renderRequests();
+      syncEntryGate();
+      showToast("Sesión cerrada.");
+    }
+
+    function autofillFormsFromSession() {
+      if (!sessionUser) return;
+      const qName = document.getElementById("quoteName");
+      const qPhone = document.getElementById("quotePhone");
+      const cName = document.getElementById("contactName");
+      const cPhone = document.getElementById("contactPhone");
+      if (qName && !qName.value) qName.value = sessionUser.name;
+      if (qPhone && !qPhone.value && sessionUser.phone) qPhone.value = sessionUser.phone;
+      if (cName && !cName.value) cName.value = sessionUser.name;
+      if (cPhone && !cPhone.value && sessionUser.phone) cPhone.value = sessionUser.phone;
+    }
+
+    function renderAccountUI() {
+      const badge = document.getElementById("accountStatusBadge");
+      const headline = document.getElementById("accountHeadline");
+      const desc = document.getElementById("accountDescription");
+      const area = document.getElementById("accountActionArea");
+      const headerBtn = document.getElementById("headerAccountBtn");
+      const drawerNote = document.getElementById("drawerAccountNote");
+      const activeFolderLabel = document.getElementById("activeFolderLabel");
+      const folderChipText = document.getElementById("folderChipText");
+
+      if (sessionUser) {
+        if (isAdminUser()) {
+          badge.className = "account-status-badge status-admin";
+          badge.textContent = "Cuenta Admin · Acceso Exclusivo";
+          headline.textContent = `Hola, ${sessionUser.name}`;
+          desc.textContent = "Solo tú puedes ver contraseñas y descargar las carpetas de credenciales.";
+          headerBtn.textContent = "Admin";
+        } else {
+          badge.className = "account-status-badge status-logged-in";
+          badge.textContent = `Sesión activa · ${sessionUser.role}`;
+          headline.textContent = `Hola, ${sessionUser.name}`;
+          desc.textContent = `Carpeta: ${sessionUser.folderPath} · Credenciales y contraseñas visibles solo para Admin.`;
+          headerBtn.textContent = `Cuenta (${sessionUser.name.split(" ")[0]})`;
+        }
+
+        drawerNote.textContent = `Carpeta: ${sessionUser.folderPath}`;
+        activeFolderLabel.textContent = sessionUser.folderPath;
+        folderChipText.textContent = `Carpeta activa: ${sessionUser.folderPath}`;
+
+        const adminBtnHtml = isAdminUser()
+          ? `<button type="button" class="btn btn-secondary btn-sm" onclick="downloadAllAccountFolders()">
+               Descargar todas las credenciales (.json)
+             </button>`
+          : "";
+
+        area.innerHTML = `
+          <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;">
+            ${adminBtnHtml}
+            <button type="button" class="btn btn-outline btn-sm" onclick="openAccountModal('login')">
+              Cambiar cuenta
+            </button>
+            <button type="button" class="btn btn-primary btn-sm" onclick="logoutSession()">
+              Cerrar sesión
+            </button>
+          </div>
+        `;
+      } else {
+        badge.className = "account-status-badge status-logged-out";
+        badge.textContent = "Sesión bloqueada · Ingresa credenciales";
+        headline.textContent = "Carpeta y sesión de cuenta";
+        desc.textContent = "Cada cuenta queda guardada en su propia carpeta. Solo el administrador puede ver y descargar credenciales.";
+        headerBtn.textContent = "Iniciar sesión";
+        drawerNote.textContent = "Inicia sesión para gestionar pedidos";
+        activeFolderLabel.textContent = "cuentas/sin_sesion/";
+        folderChipText.textContent = "Carpeta activa: sin sesión";
+        area.innerHTML = `
+          <div style="display:flex;justify-content:flex-end;">
+            <button type="button" class="btn btn-primary btn-sm" onclick="syncEntryGate()">
+              Ingresar credenciales
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    function selectCategory(category) {
+      currentCategory = category;
+      document.querySelectorAll("#categoryTabs .tab-btn").forEach((btn) => {
+        btn.classList.toggle("active", btn.dataset.category === category);
+      });
+      renderCatalog();
+    }
+
+    function renderCatalog() {
+      const query = (document.getElementById("searchInput").value || "").trim().toLowerCase();
+      const grid = document.getElementById("catalogGrid");
+
+      const filtered = PRODUCTS.filter((p) => {
+        const matchesCat = currentCategory === "Todas" || p.category === currentCategory;
+        const matchesQuery =
+          !query ||
+          p.name.toLowerCase().includes(query) ||
+          p.description.toLowerCase().includes(query) ||
+          p.category.toLowerCase().includes(query);
+        return matchesCat && matchesQuery;
+      });
+
+      if (!filtered.length) {
+        grid.innerHTML = `<div class="empty-state" style="grid-column: 1 / -1;">No encontramos variedades con ese filtro.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered
+        .map((p) => {
+          const selectOptions = PACK_OPTIONS.map(
+            (opt, idx) =>
+              `<option value="${idx}">${opt.label} · ${opt.multiplier * p.unitsPerBase} und (${formatCOP(opt.multiplier * p.basePrice)})</option>`
+          ).join("");
+
+          return `
+            <article class="product-card">
+              <div class="product-top">
+                <div class="product-meta">
+                  <span class="badge-cat">${p.category}</span>
+                  <span class="badge-tag">${p.tag}</span>
+                </div>
+                <h3 class="product-title">${p.name}</h3>
+                <p class="product-desc">${p.description}</p>
+                <div class="product-specs">
+                  <span>${p.weightLabel}</span>
+                  <span>·</span>
+                  <span>${p.unitsPerBase} und base</span>
+                  <span>·</span>
+                  <span>${p.prepLabel}</span>
+                </div>
+              </div>
+
+              <div class="product-bottom">
+                <div class="pack-row">
+                  <select class="pack-select" id="pack-${p.id}" onchange="updateCardPrice('${p.id}')">
+                    ${selectOptions}
+                  </select>
+                  <div class="price-box" style="text-align:right;">
+                    <strong id="price-${p.id}">${formatCOP(p.basePrice)}</strong>
+                    <span id="units-${p.id}">${p.unitsPerBase} unidades</span>
+                  </div>
+                </div>
+
+                <div class="product-actions">
+                  <button type="button" class="btn btn-primary btn-sm" onclick="requestSingleProduct('${p.id}')">
+                    Solicitar producto
+                  </button>
+                  <button type="button" class="btn btn-outline btn-sm" onclick="addToCart('${p.id}')">
+                    Agregar al carrito
+                  </button>
+                </div>
+              </div>
+            </article>
+          `;
+        })
+        .join("");
+    }
+
+    function updateCardPrice(productId) {
+      const product = PRODUCTS.find((item) => item.id === productId);
+      const packIdx = Number(document.getElementById(`pack-${productId}`).value || 0);
+      const pack = PACK_OPTIONS[packIdx] || PACK_OPTIONS[0];
+      document.getElementById(`price-${productId}`).textContent = formatCOP(product.basePrice * pack.multiplier);
+      document.getElementById(`units-${productId}`).textContent = `${product.unitsPerBase * pack.multiplier} unidades`;
+    }
+
+    function computeDiscount(subtotal) {
+      if (subtotal >= 300000) return { pct: 10, amount: subtotal * 0.10 };
+      if (subtotal >= 120000) return { pct: 5, amount: subtotal * 0.05 };
+      return { pct: 0, amount: 0 };
+    }
+
+    function toggleCart(open) {
+      if (open && !requireLogin("abrir el pedido")) return;
+      document.getElementById("cartBackdrop").classList.toggle("open", open);
+      document.getElementById("cartDrawer").classList.toggle("open", open);
+    }
+
+    function addToCart(productId) {
+      if (!requireLogin("agregar productos al pedido")) return;
+
+      const product = PRODUCTS.find((item) => item.id === productId);
+      const packIdx = Number(document.getElementById(`pack-${productId}`).value || 0);
+      const pack = PACK_OPTIONS[packIdx] || PACK_OPTIONS[0];
+      const lineKey = `${product.id}__${pack.multiplier}`;
+      const unitPrice = product.basePrice * pack.multiplier;
+      const unitsPerItem = product.unitsPerBase * pack.multiplier;
+
+      const existing = cart.find((c) => c.lineKey === lineKey);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({
+          lineKey,
+          productId: product.id,
+          name: product.name,
+          packLabel: pack.label,
+          unitPrice,
+          unitsPerItem,
+          qty: 1
+        });
+      }
+
+      saveJSON(STORAGE_KEYS.cart, cart);
+      renderCart();
+      showToast(`Agregado: ${product.name} (${pack.label})`);
+    }
+
+    function changeCartQty(index, delta) {
+      if (!requireLogin("modificar el pedido")) return;
+      if (!cart[index]) return;
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      saveJSON(STORAGE_KEYS.cart, cart);
+      renderCart();
+    }
+
+    function clearCart() {
+      if (!requireLogin("vaciar el carrito")) return;
+      cart = [];
+      saveJSON(STORAGE_KEYS.cart, cart);
+      renderCart();
+      showToast("Carrito vaciado.");
+    }
+
+    function renderCart() {
+      const container = document.getElementById("cartItemsContainer");
+      const badge = document.getElementById("cartCount");
+
+      const totalItems = cart.reduce((acc, item) => acc + item.qty, 0);
+      const subtotal = cart.reduce((acc, item) => acc + item.unitPrice * item.qty, 0);
+      const disc = computeDiscount(subtotal);
+      const total = subtotal - disc.amount;
+
+      badge.textContent = totalItems;
+      document.getElementById("cartSubtotal").textContent = formatCOP(subtotal);
+      document.getElementById("cartDiscountLabel").textContent = `${disc.pct}%`;
+      document.getElementById("cartDiscountAmount").textContent = `-${formatCOP(disc.amount)}`;
+      document.getElementById("cartTotal").textContent = formatCOP(total);
+
+      if (!cart.length) {
+        container.innerHTML = `<div class="empty-state">Tu carrito está vacío. Elige una variedad del catálogo para comenzar.</div>`;
+        return;
+      }
+
+      container.innerHTML = cart
+        .map(
+          (item, idx) => `
+            <div class="cart-item">
+              <div class="cart-item-top">
+                <div>
+                  <div class="cart-item-title">${item.name}</div>
+                  <div class="cart-item-sub">${item.packLabel} · ${item.unitsPerItem * item.qty} und. totales</div>
+                </div>
+                <strong>${formatCOP(item.unitPrice * item.qty)}</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span class="cart-item-sub">${formatCOP(item.unitPrice)} c/u</span>
+                <div class="qty-controls">
+                  <button type="button" class="qty-btn" onclick="changeCartQty(${idx}, -1)">-</button>
+                  <strong>${item.qty}</strong>
+                  <button type="button" class="qty-btn" onclick="changeCartQty(${idx}, 1)">+</button>
+                </div>
+              </div>
+            </div>
+          `
+        )
+        .join("");
+    }
+
+    function saveRequestToActiveFolder(entry) {
+      const folderKey = getActiveFolderKey();
+      ensureAccountFolder(sessionUser);
+      const record = {
+        id: "SOL-" + Date.now().toString().slice(-6),
+        createdAt: new Date().toLocaleString("es-CO"),
+        accountName: sessionUser.name,
+        accountEmail: sessionUser.email,
+        folderPath: `cuentas/${folderKey}/`,
+        ...entry
+      };
+      accountFolders[folderKey].requests.unshift(record);
+      saveJSON(STORAGE_KEYS.folders, accountFolders);
+      renderRequests();
+      return record;
+    }
+
+    function sendWhatsAppMessage(text) {
+      const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+    }
+
+    function requestSingleProduct(productId) {
+      if (!requireLogin("solicitar un producto")) return;
+
+      const product = PRODUCTS.find((item) => item.id === productId);
+      const packIdx = Number(document.getElementById(`pack-${productId}`).value || 0);
+      const pack = PACK_OPTIONS[packIdx] || PACK_OPTIONS[0];
+      const totalUnits = product.unitsPerBase * pack.multiplier;
+      const amount = product.basePrice * pack.multiplier;
+
+      const record = saveRequestToActiveFolder({
+        type: "Solicitud de Producto",
+        title: `${product.name} (${pack.label})`,
+        detail: `${totalUnits} unidades · Teléfono: ${sessionUser.phone || "No registrado"}`,
+        amount
+      });
+
+      const msg = [
+        `*SOLICITUD DE PRODUCTO — AREPAS LA UNIÓN*`,
+        `Código: ${record.id}`,
+        `Cuenta: ${sessionUser.name} (${sessionUser.email})`,
+        `Carpeta: ${record.folderPath}`,
+        `Teléfono: ${sessionUser.phone || "No especificado"}`,
+        `Producto: ${product.name}`,
+        `Presentación: ${pack.label} (${totalUnits} unidades)`,
+        `Valor estimado: ${formatCOP(amount)}`
+      ].join("\n");
+
+      sendWhatsAppMessage(msg);
+      showToast(`Solicitud guardada en ${record.folderPath} y enviada a WhatsApp.`);
+    }
+
+    function checkoutOrder() {
+      if (!requireLogin("confirmar el pedido")) return;
+      if (!cart.length) {
+        showToast("Agrega al menos un producto al carrito.");
+        return;
+      }
+
+      const subtotal = cart.reduce((acc, item) => acc + item.unitPrice * item.qty, 0);
+      const disc = computeDiscount(subtotal);
+      const total = subtotal - disc.amount;
+      const totalUnits = cart.reduce((acc, item) => acc + item.unitsPerItem * item.qty, 0);
+
+      const itemsSummary = cart
+        .map((i) => `• ${i.name} [${i.packLabel}] x${i.qty} = ${formatCOP(i.unitPrice * i.qty)}`)
+        .join("\n");
+
+      const record = saveRequestToActiveFolder({
+        type: "Pedido de Carrito",
+        title: `Pedido con ${cart.length} referencia(s) (${totalUnits} und.)`,
+        detail: `Subtotal: ${formatCOP(subtotal)} · Desc. ${disc.pct}%`,
+        amount: total,
+        items: cart
+      });
+
+      const msg = [
+        `*NUEVO PEDIDO — AREPAS LA UNIÓN*`,
+        `Código: ${record.id}`,
+        `Cuenta: ${sessionUser.name} (${sessionUser.email})`,
+        `Carpeta: ${record.folderPath}`,
+        `Teléfono: ${sessionUser.phone || "No especificado"}`,
+        ``,
+        itemsSummary,
+        ``,
+        `Total unidades: ${totalUnits}`,
+        `Subtotal: ${formatCOP(subtotal)}`,
+        `Descuento (${disc.pct}%): -${formatCOP(disc.amount)}`,
+        `*Total a pagar: ${formatCOP(total)}*`
+      ].join("\n");
+
+      sendWhatsAppMessage(msg);
+      showToast(`Pedido guardado en ${record.folderPath} y enviado a WhatsApp.`);
+    }
+
+    function populateQuoteVarieties() {
+      const sel = document.getElementById("quoteVariety");
+      sel.innerHTML = PRODUCTS.map(
+        (p) => `<option value="${p.id}">${p.name} (base ${formatCOP(p.basePrice)} / ${p.unitsPerBase} und)</option>`
+      ).join("");
+      calculateQuote();
+    }
+
+    function calculateQuote() {
+      const productId = document.getElementById("quoteVariety").value || PRODUCTS[0].id;
+      const packs = Math.max(1, Number(document.getElementById("quotePacks").value || 1));
+      const freq = document.getElementById("quoteFrequency").value;
+      const product = PRODUCTS.find((p) => p.id === productId) || PRODUCTS[0];
+
+      const totalUnits = packs * product.unitsPerBase;
+      const subtotal = packs * product.basePrice;
+      const disc = computeDiscount(subtotal);
+      const total = subtotal - disc.amount;
+
+      document.getElementById("qTotalUnits").textContent = `${totalUnits} und.`;
+      document.getElementById("qSubtotal").textContent = formatCOP(subtotal);
+      document.getElementById("qDiscountPct").textContent = `${disc.pct}%`;
+      document.getElementById("qDiscountAmt").textContent = `-${formatCOP(disc.amount)}`;
+      document.getElementById("qTotal").textContent = formatCOP(total);
+      document.getElementById("qFreqLabel").textContent = freq;
+    }
+
+    function submitQuote(e) {
+      e.preventDefault();
+      if (!requireLogin("enviar una cotización")) return;
+
+      const productId = document.getElementById("quoteVariety").value;
+      const product = PRODUCTS.find((p) => p.id === productId) || PRODUCTS[0];
+      const channel = document.getElementById("quoteChannel").value;
+      const packs = Math.max(1, Number(document.getElementById("quotePacks").value || 1));
+      const freq = document.getElementById("quoteFrequency").value;
+      const name = document.getElementById("quoteName").value.trim();
+      const phone = document.getElementById("quotePhone").value.trim();
+      const notes = document.getElementById("quoteNotes").value.trim();
+
+      const totalUnits = packs * product.unitsPerBase;
+      const subtotal = packs * product.basePrice;
+      const disc = computeDiscount(subtotal);
+      const total = subtotal - disc.amount;
+
+      const record = saveRequestToActiveFolder({
+        type: "Cotización Mayorista / Evento",
+        title: `${product.name} · ${packs} paq. (${totalUnits} und.)`,
+        detail: `${channel} · ${freq} · Contacto: ${name} (${phone})`,
+        amount: total
+      });
+
+      const msg = [
+        `*COTIZACIÓN — AREPAS LA UNIÓN*`,
+        `Código: ${record.id}`,
+        `Cuenta: ${sessionUser.name} (${sessionUser.email})`,
+        `Carpeta: ${record.folderPath}`,
+        `Cliente/Negocio: ${name}`,
+        `Teléfono: ${phone}`,
+        `Tipo de cliente: ${channel}`,
+        `Variedad: ${product.name}`,
+        `Cantidad: ${packs} paquetes (${totalUnits} unidades)`,
+        `Frecuencia: ${freq}`,
+        `Total estimado: ${formatCOP(total)}`,
+        notes ? `Notas: ${notes}` : ""
+      ]
+        .filter(Boolean)
+        .join("\n");
+
+      sendWhatsAppMessage(msg);
+      showToast(`Cotización guardada en ${record.folderPath} y enviada a WhatsApp.`);
+    }
+
+    function submitContact(e) {
+      e.preventDefault();
+      if (!requireLogin("enviar un mensaje o solicitud")) return;
+
+      const name = document.getElementById("contactName").value.trim();
+      const phone = document.getElementById("contactPhone").value.trim();
+      const topic = document.getElementById("contactTopic").value;
+      const message = document.getElementById("contactMessage").value.trim();
+
+      const record = saveRequestToActiveFolder({
+        type: topic,
+        title: `${topic} — ${name}`,
+        detail: `Tel: ${phone} · ${message}`,
+        amount: 0
+      });
+
+      const msg = [
+        `*${topic.toUpperCase()} — AREPAS LA UNIÓN*`,
+        `Código: ${record.id}`,
+        `Cuenta: ${sessionUser.name} (${sessionUser.email})`,
+        `Carpeta: ${record.folderPath}`,
+        `Nombre: ${name}`,
+        `Teléfono: ${phone}`,
+        `Mensaje: ${message}`
+      ].join("\n");
+
+      sendWhatsAppMessage(msg);
+      document.getElementById("contactForm").reset();
+      autofillFormsFromSession();
+      showToast(`Solicitud guardada en ${record.folderPath} y enviada a WhatsApp.`);
+    }
+
+    function getActiveRequests() {
+      const folderKey = getActiveFolderKey();
+      if (!folderKey || !accountFolders[folderKey]) return [];
+      return accountFolders[folderKey].requests || [];
+    }
+
+    function togglePasswordVisibility(folderKey) {
+      if (!isAdminUser()) {
+        showToast("Solo el administrador puede ver contraseñas.");
+        return;
+      }
+      revealedPasswords[folderKey] = !revealedPasswords[folderKey];
+      renderRequests();
+    }
+
+    function renderRequests() {
+      const listEl = document.getElementById("requestsList");
+      const countEl = document.getElementById("requestsCountText");
+      const toolbarBtns = document.getElementById("requestsToolbarButtons");
+      const adminVault = document.getElementById("adminVaultContainer");
+
+      if (!sessionUser) {
+        countEl.textContent = "Ingresa tus credenciales para ver tu carpeta";
+        toolbarBtns.innerHTML = "";
+        adminVault.innerHTML = "";
+        listEl.innerHTML = `
+          <div class="empty-state">
+            Ingresa tus credenciales para consultar tus solicitudes.
+          </div>
+        `;
+        return;
+      }
+
+      const items = getActiveRequests();
+      countEl.textContent = `${items.length} solicitud(es) en ${sessionUser.folderPath}`;
+
+      toolbarBtns.innerHTML = `
+        <button type="button" class="btn btn-outline btn-sm" onclick="exportRequestsCSV()">
+          Exportar mis solicitudes (CSV)
+        </button>
+        <button type="button" class="btn btn-outline btn-sm" onclick="clearRequests()">
+          Limpiar mi historial
+        </button>
+      `;
+
+      if (!items.length) {
+        listEl.innerHTML = `
+          <div class="empty-state">
+            Tu carpeta <strong>${sessionUser.folderPath}</strong> aún no tiene solicitudes. Solicita un producto, cotiza o envía un mensaje para registrarlo.
+          </div>
+        `;
+      } else {
+        listEl.innerHTML = items
+          .map(
+            (r) => `
+              <div class="request-item">
+                <div>
+                  <strong>${r.id} · ${r.title}</strong>
+                  <div class="request-meta">${r.type} · ${r.detail} · ${r.createdAt}</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;">
+                  ${r.amount > 0 ? `<strong>${formatCOP(r.amount)}</strong>` : ""}
+                  <button type="button" class="btn btn-outline btn-sm" onclick="resendRequest('${r.id}')">
+                    Reenviar WhatsApp
+                  </button>
+                </div>
+              </div>
+            `
+          )
+          .join("");
+      }
+
+      if (isAdminUser()) {
+        const keys = Object.keys(accountFolders).filter((k) => k !== slugifyFolder(RESERVED_ADMIN_EMAIL));
+        const rowsHtml = keys.length
+          ? keys
+              .map((k) => {
+                const f = accountFolders[k];
+                const rawPass = f.credentials?.password || "(protegida)";
+                const shownPass = revealedPasswords[k] ? rawPass : "••••••••";
+                return `
+                  <div class="admin-folder-row">
+                    <div>
+                      <strong>${f.folderPath}</strong> · ${f.profile?.name || k} (${f.profile?.email || ""})
+                      <div>
+                        <span class="secret-pill">Usuario: ${f.credentials?.usuario || f.profile?.email || ""}</span>
+                        <span class="secret-pill">Contraseña: ${shownPass}</span>
+                      </div>
+                    </div>
+                    <div style="display:flex;flex-wrap:wrap;gap:8px;">
+                      <button type="button" class="btn btn-outline btn-sm" style="color:#FAF6F0;border-color:#8A6E5E;" onclick="togglePasswordVisibility('${k}')">
+                        ${revealedPasswords[k] ? "Ocultar" : "Ver contraseña"}
+                      </button>
+                      <button type="button" class="btn btn-primary btn-sm" onclick="downloadSingleFolderByAdmin('${k}')">
+                        Descargar carpeta + credenciales
+                      </button>
+                    </div>
+                  </div>
+                `;
+              })
+              .join("")
+          : `<div style="font-size:0.85rem;color:#E5D9C7;margin-top:8px;">Aún no hay cuentas de clientes registradas.</div>`;
+
+        adminVault.innerHTML = `
+          <div class="admin-vault">
+            <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;">
+              <div>
+                <h4>Bóveda Exclusiva del Administrador · Credenciales y Contraseñas</h4>
+                <p style="font-size:0.84rem;color:#E5D9C7;">
+                  Solo tú puedes ver contraseñas y descargar estos archivos. Los clientes no tienen acceso a esta sección.
+                </p>
+              </div>
+              <button type="button" class="btn btn-secondary btn-sm" onclick="downloadAllAccountFolders()">
+                Descargar todas las credenciales (.json)
+              </button>
+            </div>
+            ${rowsHtml}
+          </div>
+        `;
+      } else {
+        adminVault.innerHTML = "";
+      }
+    }
+
+    function resendRequest(reqId) {
+      if (!requireLogin("reenviar solicitudes")) return;
+      const items = getActiveRequests();
+      const found = items.find((i) => i.id === reqId);
+      if (!found) return;
+
+      const msg = [
+        `*REENVÍO DE SOLICITUD — AREPAS LA UNIÓN*`,
+        `Código: ${found.id}`,
+        `Cuenta: ${found.accountName} (${found.accountEmail})`,
+        `Carpeta: ${found.folderPath}`,
+        `Tipo: ${found.type}`,
+        `Detalle: ${found.title} — ${found.detail}`,
+        found.amount > 0 ? `Valor: ${formatCOP(found.amount)}` : ""
+      ]
+        .filter(Boolean)
+        .join("\n");
+
+      sendWhatsAppMessage(msg);
+      showToast(`Reenviando ${found.id} a WhatsApp.`);
+    }
+
+    function downloadFile(filename, content, mime = "application/json") {
+      const blob = new Blob([content], { type: mime });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function downloadSingleFolderByAdmin(folderKey) {
+      if (!isAdminUser()) {
+        showToast("Acceso denegado: solo el administrador puede descargar credenciales.");
+        return;
+      }
+      const folderData = accountFolders[folderKey];
+      if (!folderData) return;
+      const packageObj = {
+        carpeta: folderData.folderPath,
+        archivos: {
+          "perfil.json": folderData.profile,
+          "credenciales.json": folderData.credentials || {},
+          "solicitudes.json": folderData.requests || []
+        }
+      };
+      downloadFile(`carpeta_${folderKey}_credenciales.json`, JSON.stringify(packageObj, null, 2));
+      showToast(`Carpeta y credenciales de ${folderData.folderPath} descargadas.`);
+    }
+
+    function downloadAllAccountFolders() {
+      if (!isAdminUser()) {
+        showToast("Acceso denegado: solo el administrador puede descargar credenciales.");
+        return;
+      }
+      const clientFolders = {};
+      Object.keys(accountFolders)
+        .filter((k) => k !== slugifyFolder(RESERVED_ADMIN_EMAIL))
+        .forEach((k) => {
+          clientFolders[k] = accountFolders[k];
+        });
+
+      const exportBundle = {
+        exportadoEn: new Date().toISOString(),
+        administrador: RESERVED_ADMIN_EMAIL,
+        totalCuentas: Object.keys(clientFolders).length,
+        carpetas: clientFolders
+      };
+      downloadFile("todas_las_credenciales_cuentas.json", JSON.stringify(exportBundle, null, 2));
+      showToast("Todas las credenciales y carpetas descargadas.");
+    }
+
+    function exportRequestsCSV() {
+      if (!requireLogin("exportar solicitudes en CSV")) return;
+      const items = getActiveRequests();
+      if (!items.length) {
+        showToast("No hay solicitudes para exportar.");
+        return;
+      }
+      const headers = ["id", "fecha", "tipo", "titulo", "detalle", "monto_cop", "carpeta"];
+      const rows = items.map((i) =>
+        [
+          i.id,
+          `"${(i.createdAt || "").replace(/"/g, '""')}"`,
+          `"${(i.type || "").replace(/"/g, '""')}"`,
+          `"${(i.title || "").replace(/"/g, '""')}"`,
+          `"${(i.detail || "").replace(/"/g, '""')}"`,
+          i.amount || 0,
+          `"${(i.folderPath || "").replace(/"/g, '""')}"`
+        ].join(",")
+      );
+      const folderKey = getActiveFolderKey();
+      downloadFile(`solicitudes_${folderKey}.csv`, [headers.join(","), ...rows].join("\n"), "text/csv;charset=utf-8;");
+      showToast("Solicitudes exportadas en CSV.");
+    }
+
+    function clearRequests() {
+      if (!requireLogin("limpiar el historial")) return;
+      const folderKey = getActiveFolderKey();
+      if (!accountFolders[folderKey]) return;
+      accountFolders[folderKey].requests = [];
+      saveJSON(STORAGE_KEYS.folders, accountFolders);
+      renderRequests();
+      showToast("Historial de la carpeta limpiado.");
+    }
+
+    document.getElementById("yearSpan").textContent = new Date().getFullYear();
+    renderAccountUI();
+    renderCatalog();
+    populateQuoteVarieties();
+    renderCart();
+    renderRequests();
+    autofillFormsFromSession();
+    syncEntryGate();
+  </script>
+</body>
+</html>
