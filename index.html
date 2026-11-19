@@ -1189,9 +1189,14 @@
         </div>
       </div>
 
+      <p style="font-size:0.9rem;color:var(--ink-secondary);margin-bottom:16px;">
+        Cada cuenta se guarda en su carpeta privada (<code id="gateFolderPreview">cuentas/</code>). Solo tú, como administrador, puedes entrar a la cuenta admin y ver o descargar credenciales y contraseñas.
+      </p>
+
       <div class="auth-tabs">
         <button type="button" class="auth-tab active" id="gateTabLogin" onclick="switchGateTab('login')">Iniciar sesión</button>
         <button type="button" class="auth-tab" id="gateTabRegister" onclick="switchGateTab('register')">Crear cuenta</button>
+        <button type="button" class="auth-tab" id="gateTabAdmin" onclick="switchGateTab('admin')">Solo Admin</button>
       </div>
 
       <form id="gateLoginForm" onsubmit="handleGateLogin(event)">
@@ -1235,6 +1240,18 @@
         <button type="submit" class="btn btn-secondary" style="width:100%;">Crear carpeta y entrar</button>
       </form>
 
+      <form id="gateAdminForm" style="display:none;" onsubmit="handleGateAdminLogin(event)">
+        <div class="form-group">
+          <label for="gateAdminKey">Clave maestra de administrador</label>
+          <input type="password" id="gateAdminKey" class="form-control" placeholder="Solo tú conoces esta clave" required />
+        </div>
+        <p style="font-size:0.8rem;color:var(--ink-muted);margin-bottom:14px;">
+          Acceso exclusivo a la cuenta admin y bóveda de contraseñas. Configura tu clave en <code>ADMIN_MASTER_KEY</code>.
+        </p>
+        <button type="submit" class="btn btn-primary" style="width:100%;background:#2C1810;">
+          Entrar a cuenta Admin
+        </button>
+      </form>
     </div>
   </div>
 
@@ -1325,6 +1342,9 @@
           <h2 style="font-size: 1.45rem; margin-bottom: 6px;" id="accountHeadline">
             Carpeta y sesión de cuenta
           </h2>
+          <p style="font-size: 0.92rem; color: var(--ink-secondary);" id="accountDescription">
+            Cada cuenta queda guardada en su propia carpeta. Solo tú, como administrador, puedes ver y descargar credenciales y contraseñas.
+          </p>
         </div>
 
         <div id="accountActionArea"></div>
@@ -1344,9 +1364,9 @@
         <div class="filter-bar">
           <div class="category-tabs" id="categoryTabs">
             <button class="tab-btn active" data-category="Todas" onclick="selectCategory('Todas')">Todas</button>
-            <button class="tab-btn" data-category="Arepas Para Rellenar" onclick="selectCategory('Arepas Para Rellenar')">Arepas Para Rellenar</button>
-            <button class="tab-btn" data-category="Arepa Dulce De Queso" onclick="selectCategory('Arepa Dulce De Queso')">Arepa Dulce De Queso</button>
-            <button class="tab-btn" data-category="Arepa Almojabanada" onclick="selectCategory('Arepa Almojabanada')">Arepa Almojabanada</button>
+            <button class="tab-btn" data-category="Tradicionales" onclick="selectCategory('Tradicionales')">Tradicionales</button>
+            <button class="tab-btn" data-category="Rellenas y Queso" onclick="selectCategory('Rellenas y Queso')">Rellenas y Queso</button>
+            <button class="tab-btn" data-category="Parrilla y Snack" onclick="selectCategory('Parrilla y Snack')">Parrilla y Snack</button>
             <button class="tab-btn" data-category="Integral y Fit" onclick="selectCategory('Integral y Fit')">Integral y Fit</button>
           </div>
 
@@ -1493,6 +1513,14 @@
         </div>
       </div>
     </section>
+
+    <section class="section quote-section" id="solicitudes">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow">Carpetas por Cuenta</span>
+          <h2 class="section-title">Solicitudes guardadas por cuenta</h2>
+          <p class="section-subtitle">
+            Cada cuenta tiene su carpeta (<code id="activeFolderLabel">cuentas/sin_sesion/</code>) y cada solicitud se envía automáticamente al <strong>311 499 6926</strong>.
           </p>
         </div>
 
@@ -1537,7 +1565,7 @@
               </div>
               <div>
                 <strong>Horario de Atención</strong>
-                <span>Lunes a Sábado · 6:00 a. m. – 9:00 p. m.</span>
+                <span>Lunes a Sábado · 6:00 a. m. – 6:00 p. m.</span>
               </div>
               <div>
                 <strong>Cobertura</strong>
@@ -1711,9 +1739,9 @@
 
     const PRODUCTS = [
       {
-        id: "arepa-dulce-queso",
-        name: "Arepa Dulce de Queso",
-        category: "Arepa Dulce De Queso",
+        id: "arepa-blanca-tradicional",
+        name: "Arepa Blanca Tradicional",
+        category: "Tradicionales",
         tag: "Más pedida",
         description: "Suave por dentro y dorada por fuera, ideal para acompañar desayunos, huevos, carnes o quesos.",
         basePrice: 12000,
@@ -1722,9 +1750,9 @@
         prepLabel: "Lista para asar"
       },
       {
-        id: "arepa-rellenar",
-        name: "Arepa Para Rellenar",
-        category: "Arepa Para Rellenar",
+        id: "arepa-amarilla-maiz",
+        name: "Arepa Amarilla de Maíz",
+        category: "Tradicionales",
         tag: "Sabor casero",
         description: "Elaborada con maíz amarillo seleccionado de aroma intenso y textura firme en parrilla o sartén.",
         basePrice: 13000,
@@ -1733,9 +1761,9 @@
         prepLabel: "Lista para asar"
       },
       {
-        id: "arepa-almojabanada",
-        name: "Arepa Almojabanada",
-        category: "Arepa Almojabanada",
+        id: "arepa-rellena-queso",
+        name: "Arepa Rellena con Queso",
+        category: "Rellenas y Queso",
         tag: "Favorita",
         description: "Generoso relleno de queso fundido en su interior para resolver comidas rápidas con excelente sabor.",
         basePrice: 16500,
@@ -1746,7 +1774,7 @@
       {
         id: "arepa-choclo-dulce",
         name: "Arepa de Choclo Dulce",
-        category: "Arepa de Choclo Dulce",
+        category: "Rellenas y Queso",
         tag: "Dulce y suave",
         description: "Toque dulce natural de maíz tierno con textura jugosa, perfecta para media tarde o desayuno.",
         basePrice: 15500,
@@ -1757,7 +1785,7 @@
       {
         id: "arepita-parrilla-mini",
         name: "Arepita de Parrilla Mini",
-        category: "Arepa de Parrilla Mini",
+        category: "Parrilla y Snack",
         tag: "Eventos y asados",
         description: "Formato pequeño de rápida cocción ideal para asados, picadas, reuniones y catering.",
         basePrice: 14000,
@@ -1768,7 +1796,7 @@
       {
         id: "arepa-telera-asada",
         name: "Arepa Telera / Asada",
-        category: "Arepa Telera / Asada",
+        category: "Parrilla y Snack",
         tag: "Tradición",
         description: "Corte tradicional para acompañar sopas, caldos, carnes asadas y platos típicos.",
         basePrice: 13500,
@@ -1779,7 +1807,7 @@
       {
         id: "arepa-integral-semillas",
         name: "Arepa Integral con Semillas",
-        category: "Arepa Integral con Semillas",
+        category: "Integral y Fit",
         tag: "Fibra y grano",
         description: "Mezcla de harina integral y semillas seleccionadas para una opción nutritiva en el día a día.",
         basePrice: 15000,
@@ -1790,7 +1818,7 @@
       {
         id: "arepa-multicereal-ligera",
         name: "Arepa Multicereal Ligera",
-        category: "Arepa Multicereal Ligera",
+        category: "Integral y Fit",
         tag: "Balanceada",
         description: "Textura equilibrada con selección de cereales para desayunos ligeros y versátiles.",
         basePrice: 15500,
