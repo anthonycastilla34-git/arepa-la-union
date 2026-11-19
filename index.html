@@ -1367,7 +1367,7 @@
             <button class="tab-btn" data-category="Tradicionales" onclick="selectCategory('Tradicionales')">Tradicionales</button>
             <button class="tab-btn" data-category="Rellenas y Queso" onclick="selectCategory('Rellenas y Queso')">Rellenas y Queso</button>
             <button class="tab-btn" data-category="Parrilla y Snack" onclick="selectCategory('Parrilla y Snack')">Parrilla y Snack</button>
-            <button class="tab-btn" data-category="Integral y Fit" onclick="selectCategory('Integral y Fit')">Integral y Fit</button>
+            <button class="tab-btn" data-category="Panadería y Especiales" onclick="selectCategory('Panadería y Especiales')">Panadería y Especiales</button>
           </div>
 
           <div class="search-box">
@@ -1739,92 +1739,103 @@
 
     const PRODUCTS = [
       {
-        id: "arepa-blanca-tradicional",
-        name: "Arepa Blanca Tradicional",
+        id: "oblea-x10",
+        name: "Oblea ×10",
         category: "Tradicionales",
-        tag: "Más pedida",
-        description: "Suave por dentro y dorada por fuera, ideal para acompañar desayunos, huevos, carnes o quesos.",
-        basePrice: 12000,
-        unitsPerBase: 6,
-        weightLabel: "420 g aprox.",
+        tag: "Paquete ×10",
+        description: "Presentación por 10 obleas recién elaboradas, ideales para acompañar o preparar a tu gusto.",
+        basePrice: 4000,
+        unitsPerBase: 10,
+        weightLabel: "Paquete ×10",
         prepLabel: "Lista para asar"
       },
       {
-        id: "arepa-amarilla-maiz",
-        name: "Arepa Amarilla de Maíz",
+        id: "grande-x5",
+        name: "Grande ×5",
         category: "Tradicionales",
-        tag: "Sabor casero",
-        description: "Elaborada con maíz amarillo seleccionado de aroma intenso y textura firme en parrilla o sartén.",
-        basePrice: 13000,
-        unitsPerBase: 6,
-        weightLabel: "450 g aprox.",
+        tag: "Paquete ×5",
+        description: "Arepa grande en paquete de 5 unidades, perfecta para desayunos y comidas del día a día.",
+        basePrice: 2300,
+        unitsPerBase: 5,
+        weightLabel: "Paquete ×5",
         prepLabel: "Lista para asar"
       },
       {
-        id: "arepa-rellena-queso",
-        name: "Arepa Rellena con Queso",
+        id: "rellenar-x5",
+        name: "Rellenar ×5",
         category: "Rellenas y Queso",
-        tag: "Favorita",
-        description: "Generoso relleno de queso fundido en su interior para resolver comidas rápidas con excelente sabor.",
-        basePrice: 16500,
+        tag: "Paquete ×5",
+        description: "Arepa especial para rellenar en presentación de 5 unidades, práctica y rendidora.",
+        basePrice: 4000,
         unitsPerBase: 5,
-        weightLabel: "500 g aprox.",
-        prepLabel: "Calentar y servir"
+        weightLabel: "Paquete ×5",
+        prepLabel: "Abrir y rellenar"
       },
       {
-        id: "arepa-choclo-dulce",
-        name: "Arepa de Choclo Dulce",
-        category: "Rellenas y Queso",
-        tag: "Dulce y suave",
-        description: "Toque dulce natural de maíz tierno con textura jugosa, perfecta para media tarde o desayuno.",
-        basePrice: 15500,
+        id: "mediana-x5",
+        name: "Mediana ×5",
+        category: "Tradicionales",
+        tag: "Paquete ×5",
+        description: "Arepa mediana en paquete de 5 unidades, versátil para acompañar cualquier comida.",
+        basePrice: 2300,
         unitsPerBase: 5,
-        weightLabel: "480 g aprox.",
-        prepLabel: "Lista para calentar"
+        weightLabel: "Paquete ×5",
+        prepLabel: "Lista para asar"
       },
       {
-        id: "arepita-parrilla-mini",
-        name: "Arepita de Parrilla Mini",
+        id: "choricera-x8",
+        name: "Choricera ×8",
         category: "Parrilla y Snack",
-        tag: "Eventos y asados",
-        description: "Formato pequeño de rápida cocción ideal para asados, picadas, reuniones y catering.",
-        basePrice: 14000,
-        unitsPerBase: 12,
-        weightLabel: "480 g aprox.",
-        prepLabel: "Cocción rápida"
-      },
-      {
-        id: "arepa-telera-asada",
-        name: "Arepa Telera / Asada",
-        category: "Parrilla y Snack",
-        tag: "Tradición",
-        description: "Corte tradicional para acompañar sopas, caldos, carnes asadas y platos típicos.",
-        basePrice: 13500,
-        unitsPerBase: 6,
-        weightLabel: "460 g aprox.",
+        tag: "Paquete ×8",
+        description: "Arepa choricera en paquete de 8 unidades, ideal para parrilla, asados o compartir.",
+        basePrice: 3800,
+        unitsPerBase: 8,
+        weightLabel: "Paquete ×8",
         prepLabel: "Asar al gusto"
       },
       {
-        id: "arepa-integral-semillas",
-        name: "Arepa Integral con Semillas",
-        category: "Integral y Fit",
-        tag: "Fibra y grano",
-        description: "Mezcla de harina integral y semillas seleccionadas para una opción nutritiva en el día a día.",
-        basePrice: 15000,
-        unitsPerBase: 6,
-        weightLabel: "420 g aprox.",
-        prepLabel: "Lista para asar"
+        id: "pan-de-bono-x5",
+        name: "Pan de Bono ×5",
+        category: "Panadería y Especiales",
+        tag: "Paquete ×5",
+        description: "Presentación de 5 unidades de pan de bono con sabor tradicional para acompañar el café o chocolate.",
+        basePrice: 4500,
+        unitsPerBase: 5,
+        weightLabel: "Paquete ×5",
+        prepLabel: "Hornear / calentar"
       },
       {
-        id: "arepa-multicereal-ligera",
-        name: "Arepa Multicereal Ligera",
-        category: "Integral y Fit",
-        tag: "Balanceada",
-        description: "Textura equilibrada con selección de cereales para desayunos ligeros y versátiles.",
-        basePrice: 15500,
-        unitsPerBase: 6,
-        weightLabel: "420 g aprox.",
-        prepLabel: "Lista para asar"
+        id: "almojabanada-x5",
+        name: "Almojabanada ×5",
+        category: "Panadería y Especiales",
+        tag: "Paquete ×5",
+        description: "Paquete de 5 unidades de almojabanada con textura suave y sabor clásico.",
+        basePrice: 4500,
+        unitsPerBase: 5,
+        weightLabel: "Paquete ×5",
+        prepLabel: "Lista para calentar"
+      },
+      {
+        id: "queso-sal-x5",
+        name: "Queso sal ×5",
+        category: "Rellenas y Queso",
+        tag: "Paquete ×5",
+        description: "Variedad de queso sal en presentación de 5 unidades, con sabor marcado y delicioso al calentar.",
+        basePrice: 5000,
+        unitsPerBase: 5,
+        weightLabel: "Paquete ×5",
+        prepLabel: "Calentar y servir"
+      },
+      {
+        id: "queso-especial-x5",
+        name: "Queso especial ×5",
+        category: "Rellenas y Queso",
+        tag: "Paquete ×5",
+        description: "Presentación de 5 unidades de queso especial, con mezcla suave y sabor destacado.",
+        basePrice: 7000,
+        unitsPerBase: 5,
+        weightLabel: "Paquete ×5",
+        prepLabel: "Calentar y servir"
       }
     ];
 
